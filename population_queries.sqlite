@@ -1,0 +1,37 @@
+SELECT count(*) AS '# African countries'
+FROM countries
+WHERE continent = 'Africa';
+
+
+WITH joined_table AS (
+SELECT *
+FROM population_years)
+SELECT *
+FROM joined_table
+JOIN countries
+	ON joined_table.country_id = countries.id;
+
+SELECT sum(population), year, continent
+FROM joined_table
+WHERE continent = 'oceania' AND year = 2005;
+
+SELECT name, avg(population)
+FROM joined_table
+WHERE year = 2003 AND continent = 'South America'
+GROUP BY name;
+
+SELECT name, min(population)
+FROM joined_table
+WHERE year = 2007;
+
+SELECT name, avg(population)
+FROM joined_table
+WHERE name = 'Poland';
+
+SELECT name, avg(population), continent
+FROM joined_table
+WHERE name LIKE 'THE %';
+
+SELECT continent, sum(population), year
+FROM joined_table
+WHERE year = 2010;
